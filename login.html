@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Site</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #e8f5e9; /* Latar belakang hijau muda yang menenangkan */
+            margin: 0;
+            color: #333;
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 380px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .login-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            margin-bottom: 35px;
+            color: #2e607d; /* Hijau tua */
+            font-size: 2.2em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: calc(100% - 24px); /* Dikurangi padding */
+            padding: 12px;
+            border: 1px solid #a5b6d6; /* Border hijau muda */
+            border-radius: 8px;
+            font-size: 1.1em;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #4c8baf; /* Border hijau saat fokus */
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #4c63af; /* Hijau cerah */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #38568e; /* Hijau lebih gelap saat hover */
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            color: #d32f2f; /* Merah untuk error */
+            margin-top: 20px;
+            font-size: 1em;
+            font-weight: 500;
+            display: none; /* Sembunyikan secara default */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>LOGIN</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email Anda:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Kata Sandi Anda:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Masuk</button>
+            <p class="error-message" id="errorMessage">Email atau Kata Sandi salah!</p>
+        </form>
+    </div>
+
+    <script>
+        // --- KREDENSIAL LOGIN ANDA ---
+        // Ganti 'SandiPribadiAnda' dengan kata sandi yang Anda inginkan.
+        // Email ini adalah satu-satunya yang akan diterima.
+        const VALID_EMAIL = "nielgun501@gmail.com";
+        const VALID_PASSWORD = "israel40"; // <--- GANTI INI!
+        // ----------------------------
+
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const errorMessage = document.getElementById('errorMessage');
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah form di-submit dan refresh halaman
+
+            const enteredEmail = emailInput.value;
+            const enteredPassword = passwordInput.value;
+
+            // Validasi format email dasar (HTML5 type="email" sudah membantu, ini pelengkap)
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(enteredEmail)) {
+                errorMessage.textContent = "Mohon masukkan format email yang valid.";
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // Memeriksa kredensial
+            if (enteredEmail === VALID_EMAIL && enteredPassword === VALID_PASSWORD) {
+                alert("Login Berhasil! Selamat datang di website GKSS.");
+                window.location.href = "dashboard.html"; // Arahkan ke halaman dashboard
+            } else {
+                errorMessage.textContent = "Email atau Kata Sandi yang Anda masukkan salah.";
+                errorMessage.style.display = 'block';
+                emailInput.value = ''; // Kosongkan input untuk percobaan berikutnya
+                passwordInput.value = '';
+            }
+        });
+    </script>
+
+</body>
+</html>

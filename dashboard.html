@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="Logo GKSS (3).png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - GKSS!</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #e0f7fa; /* Light blue background */
+            margin: 0;
+            color: #263238; /* Dark text */
+            text-align: center;
+        }
+
+        .dashboard-container {
+            background-color: #ffffff;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            max-width: 600px;
+            width: 90%;
+            animation: fadeIn 1s ease-out;
+        }
+
+        h1 {
+            color: #004379; /* Teal color for heading */
+            margin-bottom: 20px;
+            font-size: 2.8em;
+        }
+
+        p {
+            font-size: 1.3em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .countdown {
+            font-size: 1.1em;
+            color: #546e7a; /* Greyish blue */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <h1>Selamat Datang!</h1>
+        <p>Anda berhasil masuk ke website.</p>
+        <p class="countdown">Anda akan diarahkan ke halaman utama dalam <span id="timer">5</span> detik.</p>
+    </div>
+
+    <script>
+        const redirectDelay = 5; // Durasi penundaan dalam detik
+        let timeLeft = redirectDelay;
+        const timerElement = document.getElementById('timer');
+        const targetPage = "selamat datang.html"; // Ganti dengan halaman tujuan setelah redirect
+
+        // Fungsi untuk memperbarui hitungan mundur
+        function updateTimer() {
+            if (timeLeft > 0) {
+                timerElement.textContent = timeLeft;
+                timeLeft--;
+            } else {
+                // Setelah hitungan mundur selesai, arahkan ke halaman lain
+                window.location.href = targetPage;
+            }
+        }
+
+        // Panggil updateTimer setiap 1 detik
+        // Menggunakan setInterval untuk hitungan mundur visual
+        const countdownInterval = setInterval(updateTimer, 1000);
+
+        // Langsung panggil fungsi pertama kali agar timer langsung dimulai
+        updateTimer();
+
+        // Optional: Bersihkan interval jika tidak diperlukan lagi untuk menghemat sumber daya
+        // Ini akan terpicu ketika redirect terjadi
+        setTimeout(() => {
+            clearInterval(countdownInterval);
+        }, (redirectDelay + 1) * 1000); // +1 detik untuk memastikan timer selesai di 0
+    </script>
+
+</body>
+</html>
